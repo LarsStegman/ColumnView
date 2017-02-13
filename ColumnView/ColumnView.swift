@@ -29,6 +29,7 @@ class ColumnView: UIScrollView {
 
     /// Sets up the initial constraints
     private func setup() {
+        alwaysBounceHorizontal = true
         showsHorizontalScrollIndicator = true
         contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -45,8 +46,8 @@ class ColumnView: UIScrollView {
         self.addConstraints(constraints)
     }
 
-    /// If a view is added, it will be sized across the whole height of the view. The width is set by looking at the 
-    /// `intrinsicContentSize` attribute. The view will be positioned on the right of the already present views.
+    /// If a view is added, it will be sized across the whole height of the column view. The width is set by looking at
+    /// the `intrinsicContentSize` attribute. The view will be positioned on the right of the already present views.
     ///
     /// - Parameter view: The subview to add
     func add(column view: UIView) {
@@ -72,6 +73,16 @@ class ColumnView: UIScrollView {
     /// Note: Make sure all subviews are laid out.
     var columnAnchors: [CGPoint] {
         return columnViews.map({ return $0.frame.origin })
+    }
+
+    func targetColumnFrame(for point: CGPoint) -> CGRect? {
+        for column in columnViews {
+            let convertedPoint = contentView.convert(point, to: column)
+            if column.point(inside: convertedPoint, with: nil) {
+                return column.frame
+            }
+        }
+        return nil
     }
 
 
