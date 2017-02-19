@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		485AD91E1E4FD25200E8B197 /* ColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485AD91D1E4FD25200E8B197 /* ColumnView.swift */; };
+		48BB8A781E5A1BFE00FB13C2 /* NSLayoutConstraint+Multiplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB8A771E5A1BFE00FB13C2 /* NSLayoutConstraint+Multiplier.swift */; };
 		48EE94C31E4E119C005199CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE94C21E4E119C005199CA /* AppDelegate.swift */; };
 		48EE94C51E4E119C005199CA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE94C41E4E119C005199CA /* ViewController.swift */; };
 		48EE94C81E4E119C005199CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48EE94C61E4E119C005199CA /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		485AD91D1E4FD25200E8B197 /* ColumnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColumnView.swift; sourceTree = "<group>"; };
+		48BB8A771E5A1BFE00FB13C2 /* NSLayoutConstraint+Multiplier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Multiplier.swift"; sourceTree = "<group>"; };
 		48EE94BF1E4E119C005199CA /* ColumnView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColumnView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48EE94C21E4E119C005199CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		48EE94C41E4E119C005199CA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				48EE94F01E4E11C0005199CA /* ColumnViewController.swift */,
 				485AD91D1E4FD25200E8B197 /* ColumnView.swift */,
 				48EE94F21E4E178D005199CA /* Sizable.swift */,
+				48BB8A771E5A1BFE00FB13C2 /* NSLayoutConstraint+Multiplier.swift */,
 			);
 			path = ColumnView;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				485AD91E1E4FD25200E8B197 /* ColumnView.swift in Sources */,
 				48EE94C51E4E119C005199CA /* ViewController.swift in Sources */,
 				48EE94F31E4E178D005199CA /* Sizable.swift in Sources */,
+				48BB8A781E5A1BFE00FB13C2 /* NSLayoutConstraint+Multiplier.swift in Sources */,
 				48EE94C31E4E119C005199CA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

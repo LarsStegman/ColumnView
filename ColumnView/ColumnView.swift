@@ -12,8 +12,11 @@ import UIKit
 /// Maintains columns of views.
 class ColumnView: UIScrollView {
 
+    public var dissmissAnimationDuration = 0.5
+
     private var contentView: UIView!
     private var columnViews = [UIView]()
+    private var columnConstraints = [[NSLayoutConstraint]]()
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -46,36 +49,104 @@ class ColumnView: UIScrollView {
         self.addConstraints(constraints)
     }
 
+
     /// If a view is added, it will be sized across the whole height of the column view. The width is set by looking at
     /// the `intrinsicContentSize` attribute. The view will be positioned on the right of the already present views.
     ///
-    /// - Parameter view: The subview to add
-    func add(column view: UIView) {
-        let viewToAlignLeftEdgeTo = columnViews.last ?? contentView
+    /// - Parameters:
+    ///   - view: The view to add
+    ///   - animated: Whether to add the view animated
+    ///   - focus: Whether the new view should be scrolled into view.
+    func add(column view: UIView, animated: Bool, focus: Bool = false) {
+        let viewToAlignLeftEdgeTo = columnViews.last ?? contentView!
         let edgeAttribute: NSLayoutAttribute = viewToAlignLeftEdgeTo == contentView ? .left : .right
-
+        let cornerCoordinate = viewToAlignLeftEdgeTo == contentView ?
+            viewToAlignLeftEdgeTo.frame.origin : viewToAlignLeftEdgeTo.frame.topRight
         view.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(view)
+
+        let initialOffset = frame.width - cornerCoordinate.x + contentOffset.x
+
+        let verticalConstraints =
+            [NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top,
+                                multiplier: 1.0, constant: 0),
+             NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: contentView,
+                                attribute: .bottom, multiplier: 1.0, constant: 0)]
+        let horizontalConstraint =
+             NSLayoutConstraint(item: view, attribute: .left, relatedBy: .equal, toItem: viewToAlignLeftEdgeTo,
+                                attribute: edgeAttribute, multiplier: 1.0, constant: initialOffset)
         columnViews.append(view)
-        let constraints = [NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: contentView,
-                                              attribute: .top, multiplier: 1.0, constant: 0),
-                           NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: contentView,
-                                              attribute: .bottom, multiplier: 1.0, constant: 0),
-                           NSLayoutConstraint(item: view, attribute: .left, relatedBy: .equal,
-                                              toItem: viewToAlignLeftEdgeTo, attribute: edgeAttribute,
-                                              multiplier: 1.0, constant: 0)]
-        contentView.addConstraints(constraints)
-        setNeedsLayout()
+        columnConstraints.append(verticalConstraints + [horizontalConstraint])
+
+        contentView.addConstraints(verticalConstraints + [horizontalConstraint])
+        setNeedsUpdateConstraints()
+        contentView.layoutSubviews()
+        horizontalConstraint.constant = 0
+        setNeedsUpdateConstraints()
+        UIView.animate(withDuration: animated && initialOffset > 0 ? 0.2 : 0,
+                       delay: dissmissAnimationDuration, options: [.curveEaseOut],
+                       animations: {
+            self.contentView.layoutSubviews()
+        }, completion: { (_) in
+            if focus {
+                self.scrollRectToVisible(view.frame, animated: animated)
+            }
+        })
     }
 
-    /// A list of the subview frame origins.
-    /// 
-    /// Note: Make sure all subviews are laid out.
-    var columnAnchors: [CGPoint] {
-        return columnViews.map({ return $0.frame.origin })
+    /// Removes a column.
+    ///
+    /// - Parameters:
+    ///   - view: The view to remove.
+    ///   - animated: Whether to animate the removal.
+    func remove(column view: UIView, animated: Bool) {
+        layoutIfNeeded()
+        guard let index = columnViews.index(of: view) else {
+            return
+        }
+        let removedViewWidth = view.frame.width
+        columnViews.remove(at: index)
+        let viewConstraints = columnConstraints.remove(at: index)
+
+        UIView.animate(withDuration: animated ? dissmissAnimationDuration : 0, delay: 0,
+                       options: [.curveEaseInOut], animations: {
+            view.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+            view.alpha = 0
+        }, completion: { (_) in
+            view.removeConstraints(viewConstraints)
+            view.removeFromSuperview()
+        })
+
+        guard columnViews.count > 0 && index < columnViews.count else {
+            return
+        }
+
+        let nextView = columnViews[index]
+        let previousView = index == 0 ? contentView! : columnViews[index - 1]
+        let edgeAttribute: NSLayoutAttribute = previousView == contentView ? .left : .right
+        let horizontalPositionConstraint = NSLayoutConstraint(item: nextView, attribute: .left, relatedBy: .equal,
+                                                              toItem: previousView, attribute: edgeAttribute,
+                                                              multiplier: 1.0, constant: removedViewWidth)
+        contentView.addConstraint(horizontalPositionConstraint)
+        setNeedsUpdateConstraints()
+        contentView.layoutSubviews()
+
+        horizontalPositionConstraint.constant = 0
+        setNeedsUpdateConstraints()
+        UIView.animate(withDuration: animated ? 0.2 : 0, delay: animated ? 0.8 * dissmissAnimationDuration : 0,
+                       options: [.curveEaseOut],
+                       animations: {
+            self.contentView.layoutSubviews()
+        })
     }
 
-    func targetColumnFrame(for point: CGPoint) -> CGRect? {
+    /// Returns the frame for a column at a certain point. If no column is present, nil will be returned.
+    ///
+    /// - Parameter point: The point in the scroll view contentSize system.
+    /// - Returns: The frame
+    ///
+    /// - Complexity: O(n)
+    func columnFrame(for point: CGPoint) -> CGRect? {
         for column in columnViews {
             let convertedPoint = contentView.convert(point, to: column)
             if column.point(inside: convertedPoint, with: nil) {
@@ -100,16 +171,8 @@ class ColumnView: UIScrollView {
     }
 }
 
-extension UIView: SizableView {
-    var preferredHorizontalCompactContentSize: CGSize {
-        return self.intrinsicContentSize
+fileprivate extension CGRect {
+    var topRight: CGPoint {
+        return CGPoint(x: self.maxX, y: self.minY)
     }
-
-    var preferredHorizontalRegularContentSize: CGSize {
-        return self.intrinsicContentSize
-    }
-
-    var preferredHorizontalSizeClass: UIUserInterfaceSizeClass {
-        return self.traitCollection.horizontalSizeClass
-    } 
 }
