@@ -21,17 +21,17 @@ class ColumnViewController: UIViewController, UIScrollViewDelegate {
     private var columnWidthConstraints = [NSLayoutConstraint]()
 
     /// Adds a column to the column view controller. If the view controller is already in the view controller hierarchy,
-    /// it will not be added again.
+    /// it will not be added again. Be sure to set the preferred content size.
     ///
     /// - Parameters:
     ///   - vc: The vc to add
     ///   - animated: Animate adding the view
-    func addColumn(vc: UIViewController, animated: Bool) {
+    func addColumn(vc: UIViewController, animated: Bool, focus: Bool = false) {
         guard !childViewControllers.contains(vc) else {
             return
         }
         addChildViewController(vc)
-        columnView.add(column: vc.view, animated: animated)
+        columnView.add(column: vc.view, animated: animated, focus: focus)
         let widthConstraint = NSLayoutConstraint(item: vc.view, attribute: .width, relatedBy: .equal,
                                                  toItem: columnView, attribute: .width, multiplier: 1, constant: 0)
         columnWidthConstraints.append(widthConstraint)
@@ -79,11 +79,12 @@ class ColumnViewController: UIViewController, UIScrollViewDelegate {
 
         updateWidth(forChildViewController: vc)
         updateTraitCollection(forChildViewController: vc)
+        vc.view.setNeedsLayout()
     }
 
     // MARK: - Child view width and trait collection management.
 
-    /// Updates the width constraint based on the intrinsic content size and the column view's frame.
+    /// Updates the width constraint based on the preferred content size.
     ///
     /// - Parameter vc: The view controller to update
     private func updateWidth(forChildViewController vc: UIViewController) {
@@ -95,12 +96,12 @@ class ColumnViewController: UIViewController, UIScrollViewDelegate {
         let preferredContentWidthRatio = vc.preferredContentSize.width / view.frame.width
         let ratio: Double
         switch preferredContentWidthRatio {
-        case 0.0..<0.2:   ratio = 0.2
+        case 0.0..<0.2:   ratio = 1/5
         case 0.2..<(1/3): ratio = 1/3
-        case (1/3)..<0.5: ratio = 0.5
+        case (1/3)..<0.5: ratio = 1/2
         case 0.5..<(2/3): ratio = 2/3
-        case (2/3)..<0.8: ratio = 0.8
-        default:          ratio = 1.0
+        case (2/3)..<0.8: ratio = 4/5
+        default:          ratio = 1/1
         }
 
         columnWidthConstraints[index] = constraint.setMultiplier(multiplier: CGFloat(ratio))
@@ -170,23 +171,9 @@ class ColumnViewController: UIViewController, UIScrollViewDelegate {
             columnView.setContentOffset(offset, animated: true)
         }
     }
-
-
 }
 
-extension UIColor {
-    static var randomColor: UIColor {
-        switch arc4random() % 5 {
-        case 0: return .purple
-        case 1: return .green
-        case 2: return .yellow
-        case 3: return .red
-        case 4: return .blue
-        default: return .gray
-        }
-    }
-}
-
+// Adds default implementations for SizableViewController
 extension UIViewController: SizableViewController {
     var columnViewController: ColumnViewController? {
         return parent as? ColumnViewController ?? parent?.columnViewController

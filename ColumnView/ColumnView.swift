@@ -32,6 +32,7 @@ class ColumnView: UIScrollView {
 
     /// Sets up the initial constraints
     private func setup() {
+        decelerationRate = UIScrollViewDecelerationRateFast
         alwaysBounceHorizontal = true
         showsHorizontalScrollIndicator = true
         contentView = UIView()
@@ -57,7 +58,7 @@ class ColumnView: UIScrollView {
     ///   - view: The view to add
     ///   - animated: Whether to add the view animated
     ///   - focus: Whether the new view should be scrolled into view.
-    func add(column view: UIView, animated: Bool, focus: Bool = false) {
+    func add(column view: UIView, animated: Bool, focus: Bool) {
         let viewToAlignLeftEdgeTo = columnViews.last ?? contentView!
         let edgeAttribute: NSLayoutAttribute = viewToAlignLeftEdgeTo == contentView ? .left : .right
         let cornerCoordinate = viewToAlignLeftEdgeTo == contentView ?
