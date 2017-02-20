@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		48051AC61E5B6D9800F5A43C /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 48051AC51E5B6D9800F5A43C /* README.md */; };
 		485AD91E1E4FD25200E8B197 /* ColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485AD91D1E4FD25200E8B197 /* ColumnView.swift */; };
 		48BB8A781E5A1BFE00FB13C2 /* NSLayoutConstraint+Multiplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB8A771E5A1BFE00FB13C2 /* NSLayoutConstraint+Multiplier.swift */; };
 		48BB8A7A1E5A2BF900FB13C2 /* DemoColumns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB8A791E5A2BF900FB13C2 /* DemoColumns.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		48051AC51E5B6D9800F5A43C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		485AD91D1E4FD25200E8B197 /* ColumnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColumnView.swift; sourceTree = "<group>"; };
 		48BB8A771E5A1BFE00FB13C2 /* NSLayoutConstraint+Multiplier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Multiplier.swift"; sourceTree = "<group>"; };
 		48BB8A791E5A2BF900FB13C2 /* DemoColumns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoColumns.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				485AD91D1E4FD25200E8B197 /* ColumnView.swift */,
 				48EE94F21E4E178D005199CA /* Sizable.swift */,
 				48BB8A771E5A1BFE00FB13C2 /* NSLayoutConstraint+Multiplier.swift */,
+				48051AC51E5B6D9800F5A43C /* README.md */,
 			);
 			path = ColumnView;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				48BB8A7A1E5A2BF900FB13C2 /* DemoColumns.swift in Sources */,
 				48EE94F31E4E178D005199CA /* Sizable.swift in Sources */,
 				48BB8A7C1E5A2CB700FB13C2 /* DemoLabelController.swift in Sources */,
+				48051AC61E5B6D9800F5A43C /* README.md in Sources */,
 				48BB8A781E5A1BFE00FB13C2 /* NSLayoutConstraint+Multiplier.swift in Sources */,
 				48EE94C31E4E119C005199CA /* AppDelegate.swift in Sources */,
 			);
