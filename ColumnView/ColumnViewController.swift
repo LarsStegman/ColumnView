@@ -20,6 +20,8 @@ class ColumnViewController: UIViewController, UIScrollViewDelegate {
 
     private var columnWidthConstraints = [NSLayoutConstraint]()
 
+    // MARK: - Column creation/removal
+
     /// Adds a column to the column view controller. If the view controller is already in the view controller hierarchy,
     /// it will not be added again. Be sure to set the preferred content size.
     ///
@@ -57,6 +59,20 @@ class ColumnViewController: UIViewController, UIScrollViewDelegate {
 
         vc.removeFromParentViewController()
     }
+
+    override func targetViewController(forAction action: Selector, sender: Any?) -> UIViewController? {
+        guard action == #selector(show(_:sender:)) else {
+            return super.targetViewController(forAction: action, sender: sender)
+        }
+
+        return self
+    }
+
+    override func show(_ vc: UIViewController, sender: Any?) {
+        self.addColumn(vc: vc, animated: true, focus: true)
+    }
+
+    // MARK: - View management
 
     override func loadView() {
         view = ColumnView()
