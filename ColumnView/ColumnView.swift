@@ -15,7 +15,7 @@ class ColumnView: UIScrollView {
     public var dissmissAnimationDuration = 0.5
 
     private var contentView: UIView!
-    private var columnViews = [UIView]()
+    private(set) var columnViews = [UIView]()
     private var columnConstraints = [[NSLayoutConstraint]]()
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -58,7 +58,7 @@ class ColumnView: UIScrollView {
     ///   - view: The view to add
     ///   - animated: Whether to add the view animated
     ///   - focus: Whether the new view should be scrolled into view.
-    func add(column view: UIView, animated: Bool, focus: Bool) {
+    func add(column view: UIView, animated: Bool, completion: ((Bool) -> Void)? = nil) {
         let viewToAlignLeftEdgeTo = columnViews.last ?? contentView!
         let edgeAttribute: NSLayoutAttribute = viewToAlignLeftEdgeTo == contentView ? .left : .right
         let cornerCoordinate = viewToAlignLeftEdgeTo == contentView ?
@@ -88,11 +88,7 @@ class ColumnView: UIScrollView {
                        delay: dissmissAnimationDuration, options: [.curveEaseOut],
                        animations: {
             self.contentView.layoutSubviews()
-        }, completion: { (_) in
-            if focus {
-                self.scrollRectToVisible(view.frame, animated: animated)
-            }
-        })
+        }, completion: completion)
     }
 
     /// Removes a column.
@@ -141,19 +137,53 @@ class ColumnView: UIScrollView {
         })
     }
 
-    /// Returns the frame for a column at a certain point. If no column is present, nil will be returned.
+    /// Returns the view column at a certain point. If no column is present, nil will be returned.
     ///
     /// - Parameter point: The point in the scroll view contentSize system.
+    /// - Parameter dir: Whether to return the view to the left or right of this view.
     /// - Returns: The frame
     ///
     /// - Complexity: O(n)
-    func columnFrame(for point: CGPoint) -> CGRect? {
-        for column in columnViews {
-            let convertedPoint = contentView.convert(point, to: column)
-            if column.point(inside: convertedPoint, with: nil) {
-                return column.frame
+    func column(at point: CGPoint, to dir: Direction? = nil) -> (atPoint: UIView, next: UIView?)? {
+        for index in columnViews.indices {
+            let column = columnViews[index]
+            if column.frame.contains(point) {
+                if let d = dir {
+                    switch d {
+                    case .left:
+                        return (column, index > 0 ? columnViews[index - 1] : nil)
+                    case .right:
+                        return (column, index < columnViews.count - 1 ? columnViews[index + 1] : nil)
+                    }
+                } else {
+                    return (column, nil)
+                }
             }
         }
+
+        return nil
+    }
+
+    func columnAtLeftFrameEdge() -> UIView? {
+        for index in columnViews.indices {
+            let column = columnViews[index]
+            if column.frame.contains(contentOffset) {
+                return column
+            }
+        }
+        
+        return nil
+    }
+
+    func columnAtRightFrameEdge() -> UIView? {
+        let rightEdgePoint = CGPoint(x: contentOffset.x + frame.width, y: 0)
+        for index in columnViews.indices {
+            let column = columnViews[index]
+            if column.frame.contains(rightEdgePoint) {
+                return column
+            }
+        }
+
         return nil
     }
 
@@ -172,7 +202,7 @@ class ColumnView: UIScrollView {
     }
 }
 
-fileprivate extension CGRect {
+extension CGRect {
     var topRight: CGPoint {
         return CGPoint(x: self.maxX, y: self.minY)
     }

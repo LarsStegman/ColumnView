@@ -33,7 +33,9 @@ class ColumnViewController: UIViewController, UIScrollViewDelegate {
             return
         }
         addChildViewController(vc)
-        columnView.add(column: vc.view, animated: animated, focus: focus)
+        columnView.add(column: vc.view, animated: animated, completion: { [weak self] (_) in
+//            self?.scrollTo(column: vc.view)
+        })
         let widthConstraint = NSLayoutConstraint(item: vc.view, attribute: .width, relatedBy: .equal,
                                                  toItem: columnView, attribute: .width, multiplier: 1, constant: 0)
         columnWidthConstraints.append(widthConstraint)
@@ -146,7 +148,7 @@ class ColumnViewController: UIViewController, UIScrollViewDelegate {
 
     // MARK: - Column snapping
 
-    private var nextOffset: CGPoint?
+    private var lastDraggingDirection: Direction?
 
     // Calculates the new content offset. If the targetContentOffset is bigger of equal to the contentSize width minus 
     // the frame width, the new offset will not be altered, since this means that the last pane is made visible 
@@ -155,38 +157,62 @@ class ColumnViewController: UIViewController, UIScrollViewDelegate {
     // first visible column, the offset will be set to the right edge, else it will be set to the left edge.
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint,
                                    targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let offset: CGPoint = targetContentOffset.pointee
-        guard offset.x < columnView.contentSize.width - columnView.frame.width else {
-            nextOffset = nil
-            return
-        }
-
-        if let targetRect = columnView.columnFrame(for: offset) {
-            if offset.x >= targetRect.midX {
-                nextOffset = CGPoint(x: targetRect.maxX, y: 0)
-            } else {
-                nextOffset = CGPoint(x: targetRect.minX, y: 0)
-            }
-        } else {
-            nextOffset = nil
-        }
+        lastDraggingDirection = velocity.x > 0 ? Direction.right : .left
     }
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        print("Did end dragging")
         if !decelerate {
             scrollToColumnEdge()
         }
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        print("Did end decelerating")
         scrollToColumnEdge()
     }
 
+    var percentageBeforeSnap: CGFloat = 0.2
+
     private func scrollToColumnEdge() {
-        if let offset = nextOffset {
-            columnView.setContentOffset(offset, animated: true)
+        guard columnView.contentSize.width > columnView.frame.width else {
+            lastDraggingDirection = nil
+            return
         }
+
+        if let direction = lastDraggingDirection {
+            switch direction {
+            case .left:
+                guard let viewToSnap = columnView.columnAtLeftFrameEdge() else {
+                    break
+                }
+
+                if viewToSnap.frame.minX + viewToSnap.frame.width * (1 - percentageBeforeSnap) >=
+                    columnView.contentOffset.x {
+                    columnView.setContentOffset(viewToSnap.frame.origin, animated: true)
+                } else {
+                    columnView.setContentOffset(viewToSnap.frame.topRight, animated: true)
+                }
+            case .right:
+                guard let viewToSnap = columnView.columnAtRightFrameEdge() else {
+                    break
+                }
+                
+                if columnView.contentOffset.x +
+                    (columnView.frame.width - percentageBeforeSnap * viewToSnap.frame.width) > viewToSnap.frame.minX {
+                    let xOffset = viewToSnap.frame.minX - (columnView.frame.width - viewToSnap.frame.width)
+                    columnView.setContentOffset(CGPoint(x: xOffset, y: 0), animated: true)
+                } else {
+                    let xOffset = viewToSnap.frame.minX - columnView.frame.width
+                    columnView.setContentOffset(CGPoint(x: xOffset, y: 0), animated: true)
+                }
+            }
+        }
+
+        lastDraggingDirection = nil
     }
+
+    
 }
 
 // Adds default implementations for SizableViewController
@@ -217,4 +243,5 @@ extension UIViewController: SizableViewController {
         return nil
     }
 }
+
 
