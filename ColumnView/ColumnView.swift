@@ -58,7 +58,7 @@ class ColumnView: UIScrollView {
     ///   - view: The view to add
     ///   - animated: Whether to add the view animated
     ///   - focus: Whether the new view should be scrolled into view.
-    func add(column view: UIView, animated: Bool, completion: ((Bool) -> Void)? = nil) {
+    func add(column view: UIView, animated: Bool, focus: Bool) {
         let viewToAlignLeftEdgeTo = columnViews.last ?? contentView!
         let edgeAttribute: NSLayoutAttribute = viewToAlignLeftEdgeTo == contentView ? .left : .right
         let cornerCoordinate = viewToAlignLeftEdgeTo == contentView ?
@@ -88,7 +88,12 @@ class ColumnView: UIScrollView {
                        delay: dissmissAnimationDuration, options: [.curveEaseOut],
                        animations: {
             self.contentView.layoutSubviews()
-        }, completion: completion)
+        }, completion: { (_) in
+            if focus && self.contentSize.width > self.frame.width {
+                let xOffset = view.frame.minX - (self.frame.width - view.frame.width)
+                self.setContentOffset(CGPoint(x: xOffset, y: 0), animated: animated)
+            }
+        })
     }
 
     /// Removes a column.

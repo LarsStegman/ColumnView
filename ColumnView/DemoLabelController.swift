@@ -8,7 +8,8 @@
 
 import Foundation
 import UIKit
-
+var colorCount = 0
+var colors = [UIColor.purple, .green, .yellow, .red, .blue]
 class DemoLabelController: UIViewController {
 
     var repeating = 1
@@ -17,7 +18,8 @@ class DemoLabelController: UIViewController {
         let label = UILabel()
         label.text = String.init(repeating: "yo", count: repeating)
         view = label
-        view.backgroundColor = UIColor.randomColor
+        view.backgroundColor = colors[colorCount]
+        colorCount = (colorCount + 1) % colors.count
         self.preferredContentSize = view.intrinsicContentSize
     }
 

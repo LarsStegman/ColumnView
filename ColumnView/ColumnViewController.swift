@@ -33,9 +33,7 @@ class ColumnViewController: UIViewController, UIScrollViewDelegate {
             return
         }
         addChildViewController(vc)
-        columnView.add(column: vc.view, animated: animated, completion: { [weak self] (_) in
-//            self?.scrollTo(column: vc.view)
-        })
+        columnView.add(column: vc.view, animated: animated, focus: true)
         let widthConstraint = NSLayoutConstraint(item: vc.view, attribute: .width, relatedBy: .equal,
                                                  toItem: columnView, attribute: .width, multiplier: 1, constant: 0)
         columnWidthConstraints.append(widthConstraint)
