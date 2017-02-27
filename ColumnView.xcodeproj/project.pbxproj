@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		48001E571E6247370092E868 /* ColumnView.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 48001E561E6247370092E868 /* ColumnView.podspec */; };
 		48051AC61E5B6D9800F5A43C /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 48051AC51E5B6D9800F5A43C /* README.md */; };
 		482234921E610129007BA6DA /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482234911E610129007BA6DA /* Direction.swift */; };
 		485AD91E1E4FD25200E8B197 /* ColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485AD91D1E4FD25200E8B197 /* ColumnView.swift */; };
@@ -45,25 +46,26 @@
 /* Begin PBXFileReference section */
 		1F9DB76D6E09B402AECE2405 /* Pods-ColumnViewTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColumnViewTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-ColumnViewTests/Pods-ColumnViewTests.release.xcconfig"; sourceTree = "<group>"; };
 		3C09256395BB5BE563C166D7 /* Pods-ColumnViewUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColumnViewUITests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-ColumnViewUITests/Pods-ColumnViewUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		48001E561E6247370092E868 /* ColumnView.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ColumnView.podspec; sourceTree = "<group>"; };
 		48051AC51E5B6D9800F5A43C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ColumnView/README.md; sourceTree = "<group>"; };
-		482234911E610129007BA6DA /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
-		485AD91D1E4FD25200E8B197 /* ColumnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColumnView.swift; sourceTree = "<group>"; };
-		48BB8A771E5A1BFE00FB13C2 /* NSLayoutConstraint+Multiplier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Multiplier.swift"; sourceTree = "<group>"; };
-		48BB8A791E5A2BF900FB13C2 /* DemoColumns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DemoColumns.swift; path = ColumnView/DemoColumns.swift; sourceTree = "<group>"; };
-		48BB8A7B1E5A2CB700FB13C2 /* DemoLabelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DemoLabelController.swift; path = ColumnView/DemoLabelController.swift; sourceTree = "<group>"; };
+		482234911E610129007BA6DA /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Direction.swift; path = Sources/Direction.swift; sourceTree = "<group>"; };
+		485AD91D1E4FD25200E8B197 /* ColumnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColumnView.swift; path = Sources/ColumnView.swift; sourceTree = "<group>"; };
+		48BB8A771E5A1BFE00FB13C2 /* NSLayoutConstraint+Multiplier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSLayoutConstraint+Multiplier.swift"; path = "Sources/NSLayoutConstraint+Multiplier.swift"; sourceTree = "<group>"; };
+		48BB8A791E5A2BF900FB13C2 /* DemoColumns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DemoColumns.swift; path = Example/DemoColumns.swift; sourceTree = "<group>"; };
+		48BB8A7B1E5A2CB700FB13C2 /* DemoLabelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DemoLabelController.swift; path = Example/DemoLabelController.swift; sourceTree = "<group>"; };
 		48EE94BF1E4E119C005199CA /* ColumnView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColumnView.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		48EE94C21E4E119C005199CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ColumnView/AppDelegate.swift; sourceTree = "<group>"; };
-		48EE94C41E4E119C005199CA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ColumnView/ViewController.swift; sourceTree = "<group>"; };
+		48EE94C21E4E119C005199CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Example/AppDelegate.swift; sourceTree = "<group>"; };
+		48EE94C41E4E119C005199CA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Example/ViewController.swift; sourceTree = "<group>"; };
 		48EE94C71E4E119C005199CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		48EE94CE1E4E119C005199CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ColumnView/Info.plist; sourceTree = "<group>"; };
+		48EE94CE1E4E119C005199CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Example/Info.plist; sourceTree = "<group>"; };
 		48EE94D31E4E119C005199CA /* ColumnViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ColumnViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		48EE94D71E4E119C005199CA /* ColumnViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnViewTests.swift; sourceTree = "<group>"; };
-		48EE94D91E4E119C005199CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		48EE94D71E4E119C005199CA /* ColumnViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ColumnViewTests.swift; path = ../Tests/ColumnViewTests.swift; sourceTree = "<group>"; };
+		48EE94D91E4E119C005199CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Tests/Info.plist; sourceTree = "<group>"; };
 		48EE94DE1E4E119C005199CA /* ColumnViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ColumnViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		48EE94E21E4E119C005199CA /* ColumnViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnViewUITests.swift; sourceTree = "<group>"; };
-		48EE94E41E4E119C005199CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		48EE94F01E4E11C0005199CA /* ColumnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColumnViewController.swift; sourceTree = "<group>"; };
-		48EE94F21E4E178D005199CA /* Sizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sizable.swift; sourceTree = "<group>"; };
+		48EE94E21E4E119C005199CA /* ColumnViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ColumnViewUITests.swift; path = ../UITests/ColumnViewUITests.swift; sourceTree = "<group>"; };
+		48EE94E41E4E119C005199CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../UITests/Info.plist; sourceTree = "<group>"; };
+		48EE94F01E4E11C0005199CA /* ColumnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColumnViewController.swift; path = Sources/ColumnViewController.swift; sourceTree = "<group>"; };
+		48EE94F21E4E178D005199CA /* Sizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Sizable.swift; path = Sources/Sizable.swift; sourceTree = "<group>"; };
 		4F1E99A8DACE236E747A3455 /* Pods-ColumnView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColumnView.release.xcconfig"; path = "../Pods/Target Support Files/Pods-ColumnView/Pods-ColumnView.release.xcconfig"; sourceTree = "<group>"; };
 		68C75A6A7FC09CCB599ECC42 /* Pods_ColumnView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ColumnView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88F4272226C9D34162961E74 /* Pods-ColumnViewUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColumnViewUITests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-ColumnViewUITests/Pods-ColumnViewUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 		48EE94B61E4E119C005199CA = {
 			isa = PBXGroup;
 			children = (
+				48001E561E6247370092E868 /* ColumnView.podspec */,
 				48051AC51E5B6D9800F5A43C /* README.md */,
 				482FF4A21E5E1195008742A0 /* Example */,
 				48EE94C11E4E119C005199CA /* ColumnView */,
@@ -311,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				48EE94C81E4E119C005199CA /* Main.storyboard in Resources */,
+				48001E571E6247370092E868 /* ColumnView.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,7 +528,7 @@
 				48EE94C71E4E119C005199CA /* Base */,
 			);
 			name = Main.storyboard;
-			path = ColumnView;
+			path = Example;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -571,7 +575,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -616,7 +620,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Maintains columns of views.
-class ColumnView: UIScrollView {
+public class ColumnView: UIScrollView {
 
     public var dissmissAnimationDuration = 0.5
 
@@ -58,7 +58,7 @@ class ColumnView: UIScrollView {
     ///   - view: The view to add
     ///   - animated: Whether to add the view animated
     ///   - focus: Whether the new view should be scrolled into view.
-    func add(column view: UIView, animated: Bool, focus: Bool) {
+    public func add(column view: UIView, animated: Bool, focus: Bool) {
         let viewToAlignLeftEdgeTo = columnViews.last ?? contentView!
         let edgeAttribute: NSLayoutAttribute = viewToAlignLeftEdgeTo == contentView ? .left : .right
         let cornerCoordinate = viewToAlignLeftEdgeTo == contentView ?
@@ -101,7 +101,7 @@ class ColumnView: UIScrollView {
     /// - Parameters:
     ///   - view: The view to remove.
     ///   - animated: Whether to animate the removal.
-    func remove(column view: UIView, animated: Bool) {
+    public func remove(column view: UIView, animated: Bool) {
         layoutIfNeeded()
         guard let index = columnViews.index(of: view) else {
             return
@@ -149,7 +149,7 @@ class ColumnView: UIScrollView {
     /// - Returns: The frame
     ///
     /// - Complexity: O(n)
-    func column(at point: CGPoint, to dir: Direction? = nil) -> (atPoint: UIView, next: UIView?)? {
+    public func column(at point: CGPoint, to dir: Direction? = nil) -> (atPoint: UIView, next: UIView?)? {
         for index in columnViews.indices {
             let column = columnViews[index]
             if column.frame.contains(point) {
