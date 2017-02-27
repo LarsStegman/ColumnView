@@ -12,7 +12,7 @@
 import UIKit
 import Foundation
 
-class ColumnViewController: UIViewController, UIScrollViewDelegate {
+public class ColumnViewController: UIViewController, UIScrollViewDelegate {
 
     var columnView: ColumnView! {
         return view as? ColumnView
@@ -28,7 +28,7 @@ class ColumnViewController: UIViewController, UIScrollViewDelegate {
     /// - Parameters:
     ///   - vc: The vc to add
     ///   - animated: Animate adding the view
-    func addColumn(vc: UIViewController, animated: Bool, focus: Bool = false) {
+    public func addColumn(vc: UIViewController, animated: Bool, focus: Bool = false) {
         guard !childViewControllers.contains(vc) else {
             return
         }
@@ -48,7 +48,7 @@ class ColumnViewController: UIViewController, UIScrollViewDelegate {
     /// - Parameters:
     ///   - vc: The vc to remove
     ///   - animated: Animate removing the view
-    func removeColumn(vc: UIViewController, animated: Bool) {
+    public func removeColumn(vc: UIViewController, animated: Bool) {
         guard let constraintIndex = childViewControllers.index(of: vc) else {
             return
         }
@@ -60,15 +60,14 @@ class ColumnViewController: UIViewController, UIScrollViewDelegate {
         vc.removeFromParentViewController()
     }
 
-    override func targetViewController(forAction action: Selector, sender: Any?) -> UIViewController? {
-        guard action == #selector(show(_:sender:)) else {
-            return super.targetViewController(forAction: action, sender: sender)
+    public override func canPerform(action: Selector, sender: Any?) -> Bool {
+        switch action {
+        case #selector(show(_:sender:)): return true
+        default: return false
         }
-
-        return self
     }
 
-    override func show(_ vc: UIViewController, sender: Any?) {
+    public override func show(_ vc: UIViewController, sender: Any?) {
         self.addColumn(vc: vc, animated: true, focus: true)
     }
 
@@ -88,7 +87,7 @@ class ColumnViewController: UIViewController, UIScrollViewDelegate {
     /// - Important: Update the vc's `preferredContentSize` before calling this method, if you want to change its width.
     ///
     /// - Parameter vc: The vc
-    func preferredHorizontalSizeClassDidChange(forChildViewController vc: UIViewController) {
+    public func preferredHorizontalSizeClassDidChange(forChildViewController vc: UIViewController) {
         guard childViewControllers.contains(vc) else {
             return
         }
@@ -215,29 +214,21 @@ class ColumnViewController: UIViewController, UIScrollViewDelegate {
 
 // Adds default implementations for SizableViewController
 extension UIViewController: SizableViewController {
-    var columnViewController: ColumnViewController? {
+    public var columnViewController: ColumnViewController? {
         return parent as? ColumnViewController ?? parent?.columnViewController
     }
-
-    func willPersist() { }
-
-    func didPersist() { }
-
-    func willDesist() { }
-
-    func didDesist() { }
-
-    var canOpenDetailsViewController: Bool {
+    
+    public var canOpenDetailsViewController: Bool {
         return false
     }
 
-    var stringForOpeningDetailsViewController: String? {
+    public var stringForOpeningDetailsViewController: String? {
         return nil
     }
 
-    func openDetailsViewController() { }
+    public func openDetailsViewController() { }
 
-    var preferredHorizontalSizeClass: UIUserInterfaceSizeClass? {
+    public var preferredHorizontalSizeClass: UIUserInterfaceSizeClass? {
         return nil
     }
 }
