@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "ColumnView"
-    s.version      = "0.2.2"
+    s.version      = "0.2.3"
     s.summary      = "View Controllers in columns"
     s.description  = <<-DESC
     A container view controller which can contain multiple child view controllers and displays them as columns.
