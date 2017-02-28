@@ -12,7 +12,7 @@
 import UIKit
 import Foundation
 
-public class ColumnViewController: UIViewController, UIScrollViewDelegate {
+open class ColumnViewController: UIViewController, UIScrollViewDelegate {
 
     var columnView: ColumnView! {
         return view as? ColumnView
@@ -60,7 +60,7 @@ public class ColumnViewController: UIViewController, UIScrollViewDelegate {
         vc.removeFromParentViewController()
     }
 
-    public override func canPerform(action: Selector, sender: Any?) -> Bool {
+    public func canPerform(action: Selector, sender: Any?) -> Bool {
         switch action {
         case #selector(show(_:sender:)): return true
         default: return false
@@ -73,12 +73,12 @@ public class ColumnViewController: UIViewController, UIScrollViewDelegate {
 
     // MARK: - View management
 
-    override func loadView() {
+    public override func loadView() {
         view = ColumnView()
         columnView.delegate = self
     }
 
-    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+    public func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
         return false
     }
 
@@ -152,19 +152,19 @@ public class ColumnViewController: UIViewController, UIScrollViewDelegate {
     // entirely.
     // In all other cases the new offset will be a column edge. If the targetContentOffset is bigger than half of the 
     // first visible column, the offset will be set to the right edge, else it will be set to the left edge.
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint,
+    public func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint,
                                    targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         lastDraggingDirection = velocity.x > 0 ? Direction.right : .left
     }
 
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         print("Did end dragging")
         if !decelerate {
             scrollToColumnEdge()
         }
     }
 
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         print("Did end decelerating")
         scrollToColumnEdge()
     }

@@ -9,9 +9,11 @@
 /* Begin PBXBuildFile section */
 		48001E571E6247370092E868 /* ColumnView.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 48001E561E6247370092E868 /* ColumnView.podspec */; };
 		48051AC61E5B6D9800F5A43C /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 48051AC51E5B6D9800F5A43C /* README.md */; };
-		482234921E610129007BA6DA /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482234911E610129007BA6DA /* Direction.swift */; };
-		485AD91E1E4FD25200E8B197 /* ColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485AD91D1E4FD25200E8B197 /* ColumnView.swift */; };
-		48BB8A781E5A1BFE00FB13C2 /* NSLayoutConstraint+Multiplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB8A771E5A1BFE00FB13C2 /* NSLayoutConstraint+Multiplier.swift */; };
+		483884C51E6498D600C871A5 /* ColumnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483884C41E6498D600C871A5 /* ColumnViewController.swift */; };
+		483884CA1E6498E600C871A5 /* ColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483884C61E6498E600C871A5 /* ColumnView.swift */; };
+		483884CB1E6498E600C871A5 /* Sizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483884C71E6498E600C871A5 /* Sizable.swift */; };
+		483884CC1E6498E600C871A5 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483884C81E6498E600C871A5 /* Direction.swift */; };
+		483884CD1E6498E600C871A5 /* NSLayoutConstraint+Multiplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483884C91E6498E600C871A5 /* NSLayoutConstraint+Multiplier.swift */; };
 		48BB8A7A1E5A2BF900FB13C2 /* DemoColumns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB8A791E5A2BF900FB13C2 /* DemoColumns.swift */; };
 		48BB8A7C1E5A2CB700FB13C2 /* DemoLabelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB8A7B1E5A2CB700FB13C2 /* DemoLabelController.swift */; };
 		48EE94C31E4E119C005199CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE94C21E4E119C005199CA /* AppDelegate.swift */; };
@@ -19,8 +21,6 @@
 		48EE94C81E4E119C005199CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48EE94C61E4E119C005199CA /* Main.storyboard */; };
 		48EE94D81E4E119C005199CA /* ColumnViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE94D71E4E119C005199CA /* ColumnViewTests.swift */; };
 		48EE94E31E4E119C005199CA /* ColumnViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE94E21E4E119C005199CA /* ColumnViewUITests.swift */; };
-		48EE94F11E4E11C0005199CA /* ColumnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE94F01E4E11C0005199CA /* ColumnViewController.swift */; };
-		48EE94F31E4E178D005199CA /* Sizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE94F21E4E178D005199CA /* Sizable.swift */; };
 		85CCA0E4BD5F82B4152F7E9F /* Pods_ColumnView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C75A6A7FC09CCB599ECC42 /* Pods_ColumnView.framework */; };
 		A8A5AE2DB30526A8E8A31EA2 /* Pods_ColumnViewTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D69D9A715A309F0C4979CB3C /* Pods_ColumnViewTests.framework */; };
 		DF4393888DB893B541CEA715 /* Pods_ColumnViewUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFA2129E1A278CEDCCE79268 /* Pods_ColumnViewUITests.framework */; };
@@ -48,24 +48,24 @@
 		3C09256395BB5BE563C166D7 /* Pods-ColumnViewUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColumnViewUITests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-ColumnViewUITests/Pods-ColumnViewUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		48001E561E6247370092E868 /* ColumnView.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ColumnView.podspec; sourceTree = "<group>"; };
 		48051AC51E5B6D9800F5A43C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ColumnView/README.md; sourceTree = "<group>"; };
-		482234911E610129007BA6DA /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Direction.swift; path = Sources/Direction.swift; sourceTree = "<group>"; };
-		485AD91D1E4FD25200E8B197 /* ColumnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColumnView.swift; path = Sources/ColumnView.swift; sourceTree = "<group>"; };
-		48BB8A771E5A1BFE00FB13C2 /* NSLayoutConstraint+Multiplier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSLayoutConstraint+Multiplier.swift"; path = "Sources/NSLayoutConstraint+Multiplier.swift"; sourceTree = "<group>"; };
+		483884C41E6498D600C871A5 /* ColumnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColumnViewController.swift; path = Sources/ColumnViewController.swift; sourceTree = SOURCE_ROOT; };
+		483884C61E6498E600C871A5 /* ColumnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColumnView.swift; path = Sources/ColumnView.swift; sourceTree = SOURCE_ROOT; };
+		483884C71E6498E600C871A5 /* Sizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Sizable.swift; path = Sources/Sizable.swift; sourceTree = SOURCE_ROOT; };
+		483884C81E6498E600C871A5 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Direction.swift; path = Sources/Direction.swift; sourceTree = SOURCE_ROOT; };
+		483884C91E6498E600C871A5 /* NSLayoutConstraint+Multiplier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSLayoutConstraint+Multiplier.swift"; path = "Sources/NSLayoutConstraint+Multiplier.swift"; sourceTree = SOURCE_ROOT; };
+		483884CE1E64994C00C871A5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Example/Info.plist; sourceTree = "<group>"; };
 		48BB8A791E5A2BF900FB13C2 /* DemoColumns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DemoColumns.swift; path = Example/DemoColumns.swift; sourceTree = "<group>"; };
 		48BB8A7B1E5A2CB700FB13C2 /* DemoLabelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DemoLabelController.swift; path = Example/DemoLabelController.swift; sourceTree = "<group>"; };
 		48EE94BF1E4E119C005199CA /* ColumnView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColumnView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48EE94C21E4E119C005199CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Example/AppDelegate.swift; sourceTree = "<group>"; };
 		48EE94C41E4E119C005199CA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Example/ViewController.swift; sourceTree = "<group>"; };
 		48EE94C71E4E119C005199CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		48EE94CE1E4E119C005199CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Example/Info.plist; sourceTree = "<group>"; };
 		48EE94D31E4E119C005199CA /* ColumnViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ColumnViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		48EE94D71E4E119C005199CA /* ColumnViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ColumnViewTests.swift; path = ../Tests/ColumnViewTests.swift; sourceTree = "<group>"; };
 		48EE94D91E4E119C005199CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Tests/Info.plist; sourceTree = "<group>"; };
 		48EE94DE1E4E119C005199CA /* ColumnViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ColumnViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		48EE94E21E4E119C005199CA /* ColumnViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ColumnViewUITests.swift; path = ../UITests/ColumnViewUITests.swift; sourceTree = "<group>"; };
 		48EE94E41E4E119C005199CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../UITests/Info.plist; sourceTree = "<group>"; };
-		48EE94F01E4E11C0005199CA /* ColumnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColumnViewController.swift; path = Sources/ColumnViewController.swift; sourceTree = "<group>"; };
-		48EE94F21E4E178D005199CA /* Sizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Sizable.swift; path = Sources/Sizable.swift; sourceTree = "<group>"; };
 		4F1E99A8DACE236E747A3455 /* Pods-ColumnView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColumnView.release.xcconfig"; path = "../Pods/Target Support Files/Pods-ColumnView/Pods-ColumnView.release.xcconfig"; sourceTree = "<group>"; };
 		68C75A6A7FC09CCB599ECC42 /* Pods_ColumnView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ColumnView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88F4272226C9D34162961E74 /* Pods-ColumnViewUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColumnViewUITests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-ColumnViewUITests/Pods-ColumnViewUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -129,12 +129,12 @@
 		482FF4A21E5E1195008742A0 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				483884CE1E64994C00C871A5 /* Info.plist */,
 				48BB8A791E5A2BF900FB13C2 /* DemoColumns.swift */,
 				48BB8A7B1E5A2CB700FB13C2 /* DemoLabelController.swift */,
 				48EE94C21E4E119C005199CA /* AppDelegate.swift */,
 				48EE94C41E4E119C005199CA /* ViewController.swift */,
 				48EE94C61E4E119C005199CA /* Main.storyboard */,
-				48EE94CE1E4E119C005199CA /* Info.plist */,
 			);
 			name = Example;
 			sourceTree = "<group>";
@@ -145,9 +145,9 @@
 				48001E561E6247370092E868 /* ColumnView.podspec */,
 				48051AC51E5B6D9800F5A43C /* README.md */,
 				482FF4A21E5E1195008742A0 /* Example */,
-				48EE94C11E4E119C005199CA /* ColumnView */,
-				48EE94D61E4E119C005199CA /* ColumnViewTests */,
-				48EE94E11E4E119C005199CA /* ColumnViewUITests */,
+				48EE94C11E4E119C005199CA /* Sources */,
+				48EE94D61E4E119C005199CA /* Tests */,
+				48EE94E11E4E119C005199CA /* UITests */,
 				48EE94C01E4E119C005199CA /* Products */,
 				22623595E98BA92393444CD0 /* Pods */,
 				3C0503C07E43D667A9D92BC7 /* Frameworks */,
@@ -164,33 +164,36 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		48EE94C11E4E119C005199CA /* ColumnView */ = {
+		48EE94C11E4E119C005199CA /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				48EE94F01E4E11C0005199CA /* ColumnViewController.swift */,
-				485AD91D1E4FD25200E8B197 /* ColumnView.swift */,
-				48EE94F21E4E178D005199CA /* Sizable.swift */,
-				48BB8A771E5A1BFE00FB13C2 /* NSLayoutConstraint+Multiplier.swift */,
-				482234911E610129007BA6DA /* Direction.swift */,
+				483884C61E6498E600C871A5 /* ColumnView.swift */,
+				483884C71E6498E600C871A5 /* Sizable.swift */,
+				483884C81E6498E600C871A5 /* Direction.swift */,
+				483884C91E6498E600C871A5 /* NSLayoutConstraint+Multiplier.swift */,
+				483884C41E6498D600C871A5 /* ColumnViewController.swift */,
 			);
+			name = Sources;
 			path = ColumnView;
 			sourceTree = "<group>";
 		};
-		48EE94D61E4E119C005199CA /* ColumnViewTests */ = {
+		48EE94D61E4E119C005199CA /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				48EE94D71E4E119C005199CA /* ColumnViewTests.swift */,
 				48EE94D91E4E119C005199CA /* Info.plist */,
 			);
+			name = Tests;
 			path = ColumnViewTests;
 			sourceTree = "<group>";
 		};
-		48EE94E11E4E119C005199CA /* ColumnViewUITests */ = {
+		48EE94E11E4E119C005199CA /* UITests */ = {
 			isa = PBXGroup;
 			children = (
 				48EE94E21E4E119C005199CA /* ColumnViewUITests.swift */,
 				48EE94E41E4E119C005199CA /* Info.plist */,
 			);
+			name = UITests;
 			path = ColumnViewUITests;
 			sourceTree = "<group>";
 		};
@@ -477,16 +480,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48EE94F11E4E11C0005199CA /* ColumnViewController.swift in Sources */,
-				485AD91E1E4FD25200E8B197 /* ColumnView.swift in Sources */,
 				48EE94C51E4E119C005199CA /* ViewController.swift in Sources */,
-				482234921E610129007BA6DA /* Direction.swift in Sources */,
+				483884C51E6498D600C871A5 /* ColumnViewController.swift in Sources */,
+				483884CB1E6498E600C871A5 /* Sizable.swift in Sources */,
 				48BB8A7A1E5A2BF900FB13C2 /* DemoColumns.swift in Sources */,
-				48EE94F31E4E178D005199CA /* Sizable.swift in Sources */,
+				483884CA1E6498E600C871A5 /* ColumnView.swift in Sources */,
 				48BB8A7C1E5A2CB700FB13C2 /* DemoLabelController.swift in Sources */,
+				483884CD1E6498E600C871A5 /* NSLayoutConstraint+Multiplier.swift in Sources */,
 				48051AC61E5B6D9800F5A43C /* README.md in Sources */,
-				48BB8A781E5A1BFE00FB13C2 /* NSLayoutConstraint+Multiplier.swift in Sources */,
 				48EE94C31E4E119C005199CA /* AppDelegate.swift in Sources */,
+				483884CC1E6498E600C871A5 /* Direction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -633,9 +636,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AB75FB5EAD7D9DDBC8DCC997 /* Pods-ColumnView.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 34S7DCU8S9;
-				INFOPLIST_FILE = ColumnView/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nl.stegman.ColumnView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -648,9 +650,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4F1E99A8DACE236E747A3455 /* Pods-ColumnView.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 34S7DCU8S9;
-				INFOPLIST_FILE = ColumnView/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nl.stegman.ColumnView;
 				PRODUCT_NAME = "$(TARGET_NAME)";

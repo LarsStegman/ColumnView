@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Maintains columns of views.
-public class ColumnView: UIScrollView {
+open class ColumnView: UIScrollView {
 
     public var dissmissAnimationDuration = 0.5
 
@@ -22,7 +22,7 @@ public class ColumnView: UIScrollView {
         setup()
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("ColumnView does not support initialization by coder yet")
     }
 
@@ -149,7 +149,7 @@ public class ColumnView: UIScrollView {
     /// - Returns: The frame
     ///
     /// - Complexity: O(n)
-    public func column(at point: CGPoint, to dir: Direction? = nil) -> (atPoint: UIView, next: UIView?)? {
+    func column(at point: CGPoint, to dir: Direction? = nil) -> (atPoint: UIView, next: UIView?)? {
         for index in columnViews.indices {
             let column = columnViews[index]
             if column.frame.contains(point) {
@@ -200,7 +200,7 @@ public class ColumnView: UIScrollView {
         return columnViews.reduce(0, { return $0 + $1.frame.width })
     }
 
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         let width = self.width
         contentSize = CGSize(width: width, height: frame.height)
