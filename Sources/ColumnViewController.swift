@@ -60,20 +60,20 @@ open class ColumnViewController: UIViewController, UIScrollViewDelegate {
         vc.removeFromParentViewController()
     }
 
-    public func canPerform(action: Selector, sender: Any?) -> Bool {
+    open func canPerform(action: Selector, sender: Any?) -> Bool {
         switch action {
         case #selector(show(_:sender:)): return true
         default: return false
         }
     }
 
-    public override func show(_ vc: UIViewController, sender: Any?) {
+    open override func show(_ vc: UIViewController, sender: Any?) {
         self.addColumn(vc: vc, animated: true, focus: true)
     }
 
     // MARK: - View management
 
-    public override func loadView() {
+    open override func loadView() {
         view = ColumnView()
         columnView.delegate = self
     }
