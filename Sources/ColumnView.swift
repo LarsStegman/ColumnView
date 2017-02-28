@@ -200,7 +200,7 @@ open class ColumnView: UIScrollView {
         return columnViews.reduce(0, { return $0 + $1.frame.width })
     }
 
-    override public func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         let width = self.width
         contentSize = CGSize(width: width, height: frame.height)
