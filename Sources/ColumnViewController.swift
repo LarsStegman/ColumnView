@@ -158,14 +158,12 @@ open class ColumnViewController: UIViewController, UIScrollViewDelegate {
     }
 
     public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        print("Did end dragging")
         if !decelerate {
             scrollToColumnEdge()
         }
     }
 
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        print("Did end decelerating")
         scrollToColumnEdge()
     }
 
