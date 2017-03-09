@@ -12,13 +12,13 @@
 import UIKit
 import Foundation
 
-open class ColumnViewController: UIViewController, UIScrollViewDelegate {
+open class ColumnScrollViewController: UIViewController, UIScrollViewDelegate {
 
-    var columnView: ColumnView! {
-        return view as? ColumnView
+    var columnView: ColumnScrollView! {
+        return view as? ColumnScrollView
     }
 
-    private var columnWidthConstraints = [NSLayoutConstraint]()
+    private var lastAnimator: UIViewControllerAnimatedTransitioning? = nil
 
     // MARK: - Column creation/removal
 
@@ -28,19 +28,26 @@ open class ColumnViewController: UIViewController, UIScrollViewDelegate {
     /// - Parameters:
     ///   - vc: The vc to add
     ///   - animated: Animate adding the view
-    public func addColumn(vc: UIViewController, animated: Bool, focus: Bool = false) {
+    public func add(column vc: UIViewController, animated: Bool, focus: Bool = false, sender: Any? = nil) {
         guard !childViewControllers.contains(vc) else {
             return
         }
+        vc.willMove(toParentViewController: self)
         addChildViewController(vc)
-        columnView.add(column: vc.view, animated: animated, focus: true)
-        let widthConstraint = NSLayoutConstraint(item: vc.view, attribute: .width, relatedBy: .equal,
-                                                 toItem: columnView, attribute: .width, multiplier: 1, constant: 0)
-        columnWidthConstraints.append(widthConstraint)
-
-        updateWidth(forChildViewController: vc)
+        vc.loadViewIfNeeded()
         updateTraitCollection(forChildViewController: vc)
-        vc.didMove(toParentViewController: self)
+        print("Start adding animation")
+        let transitionContext = ColumnTransitioningContext(from: sender as? UIViewController ?? self, to: vc,
+                                                           animated: animated, appearing: true, direction: .left,
+                                                           completion: { (finished) in
+            vc.didMove(toParentViewController: self)
+            print("Completed animation")
+            if focus {
+                print("Scroll to view")
+            }
+        })
+        self.lastAnimator = FlyInOutAnimatedTransitioning()
+        lastAnimator?.animateTransition(using: transitionContext!)
     }
 
     /// Removes a column from the view controller.
@@ -49,13 +56,12 @@ open class ColumnViewController: UIViewController, UIScrollViewDelegate {
     ///   - vc: The vc to remove
     ///   - animated: Animate removing the view
     public func removeColumn(vc: UIViewController, animated: Bool) {
-        guard let constraintIndex = childViewControllers.index(of: vc) else {
+        guard childViewControllers.contains(vc) else {
             return
         }
         
         vc.willMove(toParentViewController: nil)
-        columnView.remove(column: vc.view, animated: animated)
-        columnWidthConstraints.remove(at: constraintIndex)
+        columnView.remove(column: vc.view)
 
         vc.removeFromParentViewController()
     }
@@ -68,13 +74,13 @@ open class ColumnViewController: UIViewController, UIScrollViewDelegate {
     }
 
     open override func show(_ vc: UIViewController, sender: Any?) {
-        self.addColumn(vc: vc, animated: true, focus: true)
+        self.add(column: vc, animated: true, focus: true, sender: sender)
     }
 
     // MARK: - View management
 
     open override func loadView() {
-        view = ColumnView()
+        view = ColumnScrollView()
         columnView.delegate = self
     }
 
@@ -92,35 +98,13 @@ open class ColumnViewController: UIViewController, UIScrollViewDelegate {
             return
         }
 
-        updateWidth(forChildViewController: vc)
         updateTraitCollection(forChildViewController: vc)
         vc.view.setNeedsLayout()
     }
 
     // MARK: - Child view width and trait collection management.
 
-    /// Updates the width constraint based on the preferred content size.
-    ///
-    /// - Parameter vc: The view controller to update
-    private func updateWidth(forChildViewController vc: UIViewController) {
-        guard let index = childViewControllers.index(of: vc) else {
-            return
-        }
-        let constraint = columnWidthConstraints[index]
 
-        let preferredContentWidthRatio = vc.preferredContentSize.width / view.frame.width
-        let ratio: Double
-        switch preferredContentWidthRatio {
-        case 0.0..<1/5: ratio = 1/5
-        case 1/5..<1/3: ratio = 1/3
-        case 1/3..<1/2: ratio = 1/2
-        case 1/2..<2/3: ratio = 2/3
-        case 2/3..<4/5: ratio = 4/5
-        default:        ratio = 1/1
-        }
-
-        columnWidthConstraints[index] = constraint.setMultiplier(multiplier: CGFloat(ratio))
-    }
 
     /// Updates the trait collection for a child view controller
     ///
@@ -167,53 +151,51 @@ open class ColumnViewController: UIViewController, UIScrollViewDelegate {
         scrollToColumnEdge()
     }
 
-    var percentageBeforeSnap: CGFloat = 0.2
+    @IBInspectable var percentageBeforeSnap: CGFloat = 0.2
 
     private func scrollToColumnEdge() {
-        guard columnView.contentSize.width > columnView.frame.width else {
+        guard columnView.contentSize.width > columnView.frame.width,
+            let direction = lastDraggingDirection else {
             lastDraggingDirection = nil
             return
         }
 
-        if let direction = lastDraggingDirection {
-            switch direction {
-            case .left:
-                guard let viewToSnap = columnView.columnAtLeftFrameEdge() else {
-                    break
-                }
-
-                if viewToSnap.frame.minX + viewToSnap.frame.width * (1 - percentageBeforeSnap) >=
-                    columnView.contentOffset.x {
-                    columnView.setContentOffset(viewToSnap.frame.origin, animated: true)
-                } else {
-                    columnView.setContentOffset(viewToSnap.frame.topRight, animated: true)
-                }
-            case .right:
-                guard let viewToSnap = columnView.columnAtRightFrameEdge() else {
-                    break
-                }
-                
-                if columnView.contentOffset.x +
-                    (columnView.frame.width - percentageBeforeSnap * viewToSnap.frame.width) > viewToSnap.frame.minX {
-                    let xOffset = viewToSnap.frame.minX - (columnView.frame.width - viewToSnap.frame.width)
-                    columnView.setContentOffset(CGPoint(x: xOffset, y: 0), animated: true)
-                } else {
-                    let xOffset = viewToSnap.frame.minX - columnView.frame.width
-                    columnView.setContentOffset(CGPoint(x: xOffset, y: 0), animated: true)
-                }
+        switch direction {
+        case .left:
+            guard let viewToSnap = columnView.columnAtLeftFrameEdge() else {
+                break
             }
+
+            if viewToSnap.frame.minX + viewToSnap.frame.width * (1 - percentageBeforeSnap) >=
+                columnView.contentOffset.x {
+                columnView.setContentOffset(viewToSnap.frame.origin, animated: true)
+            } else {
+                columnView.setContentOffset(viewToSnap.frame.topRight, animated: true)
+            }
+        case .right:
+            guard let viewToSnap = columnView.columnAtRightFrameEdge() else {
+                break
+            }
+            
+            if columnView.contentOffset.x +
+                (columnView.frame.width - percentageBeforeSnap * viewToSnap.frame.width) > viewToSnap.frame.minX {
+                let xOffset = viewToSnap.frame.minX - (columnView.frame.width - viewToSnap.frame.width)
+                columnView.setContentOffset(CGPoint(x: xOffset, y: 0), animated: true)
+            } else {
+                let xOffset = viewToSnap.frame.minX - columnView.frame.width
+                columnView.setContentOffset(CGPoint(x: xOffset, y: 0), animated: true)
+            }
+        default: break
         }
 
         lastDraggingDirection = nil
     }
-
-    
 }
 
 // Adds default implementations for SizableViewController
 extension UIViewController: SizableViewController {
-    public var columnViewController: ColumnViewController? {
-        return parent as? ColumnViewController ?? parent?.columnViewController
+    public var columnViewController: ColumnScrollViewController? {
+        return parent as? ColumnScrollViewController ?? parent?.columnViewController
     }
     
     public var canOpenDetailsViewController: Bool {

@@ -12,7 +12,7 @@ var colorCount = 0
 var colors = [UIColor.purple, .green, .yellow, .red, .blue]
 class DemoLabelController: UIViewController {
 
-    var repeating = 1
+    @IBInspectable var repeating = 1
 
     override func loadView() {
         let label = UILabel()
@@ -23,17 +23,4 @@ class DemoLabelController: UIViewController {
         self.preferredContentSize = view.intrinsicContentSize
     }
 
-}
-
-extension UIColor {
-    static var randomColor: UIColor {
-        switch arc4random() % 5 {
-        case 0: return .purple
-        case 1: return .green
-        case 2: return .yellow
-        case 3: return .red
-        case 4: return .blue
-        default: return .gray
-        }
-    }
 }
