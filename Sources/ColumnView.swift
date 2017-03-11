@@ -60,6 +60,7 @@ open class ColumnView: UIView {
             return
         }
 
+        setNeedsLayout()
         let constraints = columnConstraints[index]
         NSLayoutConstraint.deactivate(Array(constraints.values))
         guard subviews.count > 1 else { // If not, there is only one view, and we don't need to update constraints anymore.
@@ -72,13 +73,14 @@ open class ColumnView: UIView {
             let leftEdgeAttribute = left == self ? NSLayoutAttribute.leading : .trailing
             let rightEdgeAttribute = right == self ? NSLayoutAttribute.trailing : .leading
             adjacencyConstraint = NSLayoutConstraint(item: left, attribute: leftEdgeAttribute, relatedBy: .equal,
-                                                         toItem: right, attribute: rightEdgeAttribute, multiplier: 1.0,
-                                                         constant: 0)
+                                                     toItem: right, attribute: rightEdgeAttribute, multiplier: 1.0,
+                                                     constant: 0)
         }
 
         guard let adjacencyConstraintV = adjacencyConstraint else {
             return
         }
+
         superview?.addConstraint(adjacencyConstraintV)
 
         if index > 0 {
@@ -113,7 +115,7 @@ open class ColumnView: UIView {
         let preferredContentWidthRatio = view.intrinsicContentSize.width / (superview?.bounds.width ?? 1)
         let ratio: Double
         switch preferredContentWidthRatio {
-        case 0.0..<1/5: ratio = 1/5
+        case -.infinity..<1/5: ratio = 1/5
         case 1/5..<1/3: ratio = 1/3
         case 1/3..<1/2: ratio = 1/2
         case 1/2..<2/3: ratio = 2/3

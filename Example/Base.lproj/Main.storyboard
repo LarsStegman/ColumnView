@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12100" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12117" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="ipad12_9" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12072"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12084"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -38,15 +38,22 @@
                         <viewControllerLayoutGuide type="top" id="jun-rr-QyI"/>
                         <viewControllerLayoutGuide type="bottom" id="l8x-c2-5Ip"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="7jh-rN-Pd2">
+                    <view key="view" contentMode="scaleToFill" id="7jh-rN-Pd2" customClass="CenteredButtonView" customModule="ColumnView" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qc0-17-CvS">
-                                <rect key="frame" x="637.5" y="497" width="91" height="30"/>
+                                <rect key="frame" x="638" y="497" width="91" height="30"/>
                                 <state key="normal" title="Show next vc"/>
                                 <connections>
-                                    <segue destination="lV5-BK-mwG" kind="show" id="bZT-12-KKQ"/>
+                                    <segue destination="lV5-BK-mwG" kind="show" identifier="show" id="bZT-12-KKQ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xr4-Ri-YFs">
+                                <rect key="frame" x="595" y="535" width="176" height="30"/>
+                                <state key="normal" title="Dismiss and show next vc"/>
+                                <connections>
+                                    <segue destination="lV5-BK-mwG" kind="show" identifier="dismissAndShow" id="Nnc-gT-Awe"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -54,6 +61,8 @@
                         <constraints>
                             <constraint firstItem="Qc0-17-CvS" firstAttribute="centerX" secondItem="7jh-rN-Pd2" secondAttribute="centerX" id="K4o-Kt-egF"/>
                             <constraint firstItem="Qc0-17-CvS" firstAttribute="centerY" secondItem="7jh-rN-Pd2" secondAttribute="centerY" id="TiI-6f-knR"/>
+                            <constraint firstItem="xr4-Ri-YFs" firstAttribute="centerX" secondItem="Qc0-17-CvS" secondAttribute="centerX" id="clr-Ko-xrq"/>
+                            <constraint firstItem="xr4-Ri-YFs" firstAttribute="top" secondItem="Qc0-17-CvS" secondAttribute="bottom" constant="8" symbolic="YES" id="xS7-Gb-edL"/>
                         </constraints>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="500" height="700"/>
@@ -62,10 +71,10 @@
             </objects>
             <point key="canvasLocation" x="851" y="36"/>
         </scene>
-        <!--View Controller-->
+        <!--SecondVC-->
         <scene sceneID="SBf-PN-mH2">
             <objects>
-                <viewController id="lV5-BK-mwG" sceneMemberID="viewController">
+                <viewController id="lV5-BK-mwG" customClass="SecondVC" customModule="ColumnView" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JJh-VZ-Nhv"/>
                         <viewControllerLayoutGuide type="bottom" id="Dsb-Ic-ps8"/>
@@ -130,4 +139,7 @@
             <point key="canvasLocation" x="2347" y="36"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Nnc-gT-Awe"/>
+    </inferredMetricsTieBreakers>
 </document>

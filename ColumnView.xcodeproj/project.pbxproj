@@ -9,14 +9,17 @@
 /* Begin PBXBuildFile section */
 		48001E571E6247370092E868 /* ColumnView.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 48001E561E6247370092E868 /* ColumnView.podspec */; };
 		48051AC61E5B6D9800F5A43C /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 48051AC51E5B6D9800F5A43C /* README.md */; };
+		482436C91E72D82A005D35A2 /* SecondVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482436C81E72D82A005D35A2 /* SecondVC.swift */; };
 		482BE4BA1E6F350E00685FD9 /* FlyInOutAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482BE4B91E6F350E00685FD9 /* FlyInOutAnimatedTransitioning.swift */; };
 		482BE4BC1E6F53C200685FD9 /* ColumnScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482BE4BB1E6F53C200685FD9 /* ColumnScrollView.swift */; };
-		483884C51E6498D600C871A5 /* ColumnScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483884C41E6498D600C871A5 /* ColumnScrollViewController.swift */; };
+		483884C51E6498D600C871A5 /* ColumnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483884C41E6498D600C871A5 /* ColumnViewController.swift */; };
 		483884CA1E6498E600C871A5 /* ColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483884C61E6498E600C871A5 /* ColumnView.swift */; };
 		483884CB1E6498E600C871A5 /* Sizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483884C71E6498E600C871A5 /* Sizable.swift */; };
 		483884CC1E6498E600C871A5 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483884C81E6498E600C871A5 /* Direction.swift */; };
 		4844216A1E709D7E00FB2A72 /* ShowDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484421691E709D7E00FB2A72 /* ShowDemoViewController.swift */; };
 		4844216C1E70A2B700FB2A72 /* CGPoint+Offset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4844216B1E70A2B700FB2A72 /* CGPoint+Offset.swift */; };
+		48476DA01E7361A100922B22 /* ColumnViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48476D9F1E7361A100922B22 /* ColumnViewControllerDelegate.swift */; };
+		486521201E72056A00169F87 /* CenteredButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4865211F1E72056A00169F87 /* CenteredButtonView.swift */; };
 		48BB8A7A1E5A2BF900FB13C2 /* DemoColumns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB8A791E5A2BF900FB13C2 /* DemoColumns.swift */; };
 		48BB8A7C1E5A2CB700FB13C2 /* DemoLabelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB8A7B1E5A2CB700FB13C2 /* DemoLabelController.swift */; };
 		48E2A81E1E6DCF1300F5CF38 /* ColumnViewControllerTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E2A81D1E6DCF1300F5CF38 /* ColumnViewControllerTransitioningDelegate.swift */; };
@@ -53,15 +56,18 @@
 		3C09256395BB5BE563C166D7 /* Pods-ColumnViewUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColumnViewUITests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-ColumnViewUITests/Pods-ColumnViewUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		48001E561E6247370092E868 /* ColumnView.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ColumnView.podspec; sourceTree = "<group>"; };
 		48051AC51E5B6D9800F5A43C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ColumnView/README.md; sourceTree = "<group>"; };
+		482436C81E72D82A005D35A2 /* SecondVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SecondVC.swift; path = Example/SecondVC.swift; sourceTree = "<group>"; };
 		482BE4B91E6F350E00685FD9 /* FlyInOutAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FlyInOutAnimatedTransitioning.swift; path = Sources/FlyInOutAnimatedTransitioning.swift; sourceTree = SOURCE_ROOT; };
 		482BE4BB1E6F53C200685FD9 /* ColumnScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColumnScrollView.swift; path = Sources/ColumnScrollView.swift; sourceTree = SOURCE_ROOT; };
-		483884C41E6498D600C871A5 /* ColumnScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColumnScrollViewController.swift; path = Sources/ColumnScrollViewController.swift; sourceTree = SOURCE_ROOT; };
+		483884C41E6498D600C871A5 /* ColumnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColumnViewController.swift; path = Sources/ColumnViewController.swift; sourceTree = SOURCE_ROOT; };
 		483884C61E6498E600C871A5 /* ColumnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColumnView.swift; path = Sources/ColumnView.swift; sourceTree = SOURCE_ROOT; };
 		483884C71E6498E600C871A5 /* Sizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Sizable.swift; path = Sources/Sizable.swift; sourceTree = SOURCE_ROOT; };
 		483884C81E6498E600C871A5 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Direction.swift; path = Sources/Direction.swift; sourceTree = SOURCE_ROOT; };
 		483884CE1E64994C00C871A5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Example/Info.plist; sourceTree = "<group>"; };
 		484421691E709D7E00FB2A72 /* ShowDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShowDemoViewController.swift; path = Example/ShowDemoViewController.swift; sourceTree = "<group>"; };
 		4844216B1E70A2B700FB2A72 /* CGPoint+Offset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CGPoint+Offset.swift"; path = "Sources/CGPoint+Offset.swift"; sourceTree = SOURCE_ROOT; };
+		48476D9F1E7361A100922B22 /* ColumnViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColumnViewControllerDelegate.swift; path = Sources/ColumnViewControllerDelegate.swift; sourceTree = SOURCE_ROOT; };
+		4865211F1E72056A00169F87 /* CenteredButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CenteredButtonView.swift; path = Example/CenteredButtonView.swift; sourceTree = "<group>"; };
 		48BB8A791E5A2BF900FB13C2 /* DemoColumns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DemoColumns.swift; path = Example/DemoColumns.swift; sourceTree = "<group>"; };
 		48BB8A7B1E5A2CB700FB13C2 /* DemoLabelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DemoLabelController.swift; path = Example/DemoLabelController.swift; sourceTree = "<group>"; };
 		48E2A81D1E6DCF1300F5CF38 /* ColumnViewControllerTransitioningDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColumnViewControllerTransitioningDelegate.swift; path = Sources/ColumnViewControllerTransitioningDelegate.swift; sourceTree = SOURCE_ROOT; };
@@ -146,6 +152,8 @@
 				48EE94C41E4E119C005199CA /* ViewController.swift */,
 				48EE94C61E4E119C005199CA /* Main.storyboard */,
 				484421691E709D7E00FB2A72 /* ShowDemoViewController.swift */,
+				4865211F1E72056A00169F87 /* CenteredButtonView.swift */,
+				482436C81E72D82A005D35A2 /* SecondVC.swift */,
 			);
 			name = Example;
 			sourceTree = "<group>";
@@ -198,7 +206,8 @@
 			children = (
 				483884C61E6498E600C871A5 /* ColumnView.swift */,
 				482BE4BB1E6F53C200685FD9 /* ColumnScrollView.swift */,
-				483884C41E6498D600C871A5 /* ColumnScrollViewController.swift */,
+				483884C41E6498D600C871A5 /* ColumnViewController.swift */,
+				48476D9F1E7361A100922B22 /* ColumnViewControllerDelegate.swift */,
 				483884C71E6498E600C871A5 /* Sizable.swift */,
 				483884C81E6498E600C871A5 /* Direction.swift */,
 				4844216D1E70A34D00FB2A72 /* UIKit Extensions */,
@@ -513,14 +522,17 @@
 			files = (
 				4844216C1E70A2B700FB2A72 /* CGPoint+Offset.swift in Sources */,
 				48EE94C51E4E119C005199CA /* ViewController.swift in Sources */,
-				483884C51E6498D600C871A5 /* ColumnScrollViewController.swift in Sources */,
+				483884C51E6498D600C871A5 /* ColumnViewController.swift in Sources */,
 				482BE4BA1E6F350E00685FD9 /* FlyInOutAnimatedTransitioning.swift in Sources */,
+				486521201E72056A00169F87 /* CenteredButtonView.swift in Sources */,
 				483884CB1E6498E600C871A5 /* Sizable.swift in Sources */,
 				48BB8A7A1E5A2BF900FB13C2 /* DemoColumns.swift in Sources */,
 				483884CA1E6498E600C871A5 /* ColumnView.swift in Sources */,
 				48E2A81E1E6DCF1300F5CF38 /* ColumnViewControllerTransitioningDelegate.swift in Sources */,
 				48BB8A7C1E5A2CB700FB13C2 /* DemoLabelController.swift in Sources */,
+				48476DA01E7361A100922B22 /* ColumnViewControllerDelegate.swift in Sources */,
 				482BE4BC1E6F53C200685FD9 /* ColumnScrollView.swift in Sources */,
+				482436C91E72D82A005D35A2 /* SecondVC.swift in Sources */,
 				48051AC61E5B6D9800F5A43C /* README.md in Sources */,
 				48E8BC4F1E6EB92000E7CB78 /* ColumnTransitioningContext.swift in Sources */,
 				4844216A1E709D7E00FB2A72 /* ShowDemoViewController.swift in Sources */,

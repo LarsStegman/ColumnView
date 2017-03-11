@@ -42,8 +42,7 @@ class ColumnScrollView: UIScrollView {
                                               attribute: .leading, multiplier: 1.0, constant: 0),
                            NSLayoutConstraint(item: contentView, attribute: .height, relatedBy: .equal, toItem: self,
                                               attribute: .height, multiplier: 1.0, constant: 0)]
-        contentView.clipsToBounds = true
-        self.addConstraints(constraints)
+        NSLayoutConstraint.activate(constraints)
     }
 
     public func add(column: UIView) {
@@ -59,11 +58,11 @@ class ColumnScrollView: UIScrollView {
     }
 
     func columnAtLeftFrameEdge() -> UIView? {
-        return contentView.column(at: contentOffset)?.column
+        return contentView.column(at: convert(bounds.origin, to: contentView))?.column
     }
 
     func columnAtRightFrameEdge() -> UIView? {
-        return contentView.column(at: contentOffset.offsetBy(dx: self.frame.width, dy: 0))?.column
+        return contentView.column(at: convert(bounds.topRight, to: contentView))?.column
     }
 
     override open func layoutSubviews() {

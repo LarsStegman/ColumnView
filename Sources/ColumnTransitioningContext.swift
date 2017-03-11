@@ -17,7 +17,7 @@ class ColumnTransitioningContext: NSObject, UIViewControllerContextTransitioning
         return self.viewControllers[.to]
     }
 
-    private var fromVc: UIViewController! {
+    private var fromVc: UIViewController? {
         return self.viewControllers[.from]
     }
 
@@ -30,21 +30,18 @@ class ColumnTransitioningContext: NSObject, UIViewControllerContextTransitioning
     }
 
     public var direction: Direction
-    public var isAppearing: Bool
 
-    init?(from fromVc: UIViewController, to toVc: UIViewController,
-          animated: Bool, appearing: Bool, direction: Direction, completion: @escaping (Bool) -> Void) {
-        guard toVc.isViewLoaded,
-            let containerVc = (fromVc as? ColumnScrollViewController ?? fromVc.columnViewController) else {
+    init?(container: ColumnView, from fromVc: UIViewController?, to toVc: UIViewController,
+          animated: Bool, direction: Direction, completion: @escaping (Bool) -> Void) {
+        guard toVc.isViewLoaded else {
             return nil
         }
 
-        self.containerView = containerVc.columnView.contentView
+        self.containerView = container
         self.viewControllers[.from] = fromVc
         self.viewControllers[.to] = toVc
         self.completion = completion
         self.isAnimated = animated
-        self.isAppearing = appearing
         self.direction = direction
     }
 
@@ -61,33 +58,46 @@ class ColumnTransitioningContext: NSObject, UIViewControllerContextTransitioning
     }
 
     public func initialFrame(for vc: UIViewController) -> CGRect {
-        let targetFrame = vc.view.frame
-        if !isAppearing {
-            return targetFrame
+        let laidOutFrame = vc.view.frame
+        if vc == fromVc {
+            return laidOutFrame
         }
 
+        let scrollView = containerView.superview!
         switch direction {
-        case .right: return CGRect(origin: targetFrame.origin.offsetBy(dx: -targetFrame.width, dy: 0),
-                                      size: targetFrame.size)
-        case .left:  return CGRect(origin: containerView.frame.topRight, size: targetFrame.size)
-        case .down:  return targetFrame.offsetBy(dx: 0, dy: -containerView.frame.height)
-        case .up:    return targetFrame.offsetBy(dx: 0, dy: containerView.frame.height)
+        case .right:
+            let scrollViewOriginInContainerViewCoordinateSpace
+                = scrollView.convert(scrollView.bounds.origin, to: containerView)
+                    .offsetBy(dx: -laidOutFrame.width, dy: 0)
+            return CGRect(origin: scrollViewOriginInContainerViewCoordinateSpace, size: laidOutFrame.size)
+        case .left:
+            let scrollViewTopRightInContainerViewCoordinateSpace
+                = scrollView.convert(scrollView.bounds.topRight, to: containerView)
+            return CGRect(origin: scrollViewTopRightInContainerViewCoordinateSpace, size: laidOutFrame.size)
+        case .down:  return laidOutFrame.offsetBy(dx: 0, dy: -containerView.frame.height)
+        case .up:    return laidOutFrame.offsetBy(dx: 0, dy: containerView.frame.height)
         }
     }
 
     public func finalFrame(for vc: UIViewController) -> CGRect {
-        let targetFrame = vc.view.frame
-        if isAppearing {
-            return targetFrame
+        let laidOutFrame = vc.view.frame
+        if vc == toVc {
+            return laidOutFrame
         }
 
+        let scrollView = containerView.superview!
         switch direction {
-        case .right: return CGRect(origin: containerView.frame.topRight,
-                                   size: targetFrame.size)
-        case .left:  return CGRect(origin: targetFrame.origin.offsetBy(dx: -targetFrame.width, dy: 0),
-                                   size: targetFrame.size)
-        case .down:  return targetFrame.offsetBy(dx: 0, dy: containerView.frame.height)
-        case .up:    return targetFrame.offsetBy(dx: 0, dy: -containerView.frame.height)
+        case .right:
+
+            let scrollViewTopRightInContainerViewCoordinateSpace = scrollView.convert(scrollView.bounds.topRight, to: containerView)
+            return CGRect(origin: scrollViewTopRightInContainerViewCoordinateSpace,
+                                   size: laidOutFrame.size)
+        case .left:
+            return CGRect(origin: containerView.superview!.frame.origin
+                                            .offsetBy(dx: -laidOutFrame.width, dy: 0),
+                                   size: laidOutFrame.size)
+        case .down:  return laidOutFrame.offsetBy(dx: 0, dy: containerView.frame.height)
+        case .up:    return laidOutFrame.offsetBy(dx: 0, dy: -containerView.frame.height)
         }
     }
 

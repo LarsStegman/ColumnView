@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import UIKit
 
-class DemoColumns: ColumnScrollViewController {
+class DemoColumns: ColumnViewController {
 
     private var performInitialSegue = false
     override func viewDidLoad() {

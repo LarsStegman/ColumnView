@@ -12,15 +12,20 @@
 import UIKit
 import Foundation
 
-open class ColumnScrollViewController: UIViewController, UIScrollViewDelegate {
+open class ColumnViewController: UIViewController, UIScrollViewDelegate {
 
+    public var delegate: ColumnViewControllerDelegate?
     var columnView: ColumnScrollView! {
         return view as? ColumnScrollView
     }
 
-    private var lastAnimator: UIViewControllerAnimatedTransitioning? = nil
+    /// The columns managed by this ColumnViewController
+    public var columnViewControllers: [UIViewController] {
+        return childViewControllers
+    }
 
     // MARK: - Column creation/removal
+
 
     /// Adds a column to the column view controller. If the view controller is already in the view controller hierarchy,
     /// it will not be added again. Be sure to set the preferred content size.
@@ -28,7 +33,8 @@ open class ColumnScrollViewController: UIViewController, UIScrollViewDelegate {
     /// - Parameters:
     ///   - vc: The vc to add
     ///   - animated: Animate adding the view
-    public func add(column vc: UIViewController, animated: Bool, focus: Bool = false, sender: Any? = nil) {
+    public func add(column vc: UIViewController, animated: Bool, focus: Bool = false,
+                    sender: Any? = nil) {
         guard !childViewControllers.contains(vc) else {
             return
         }
@@ -36,18 +42,23 @@ open class ColumnScrollViewController: UIViewController, UIScrollViewDelegate {
         addChildViewController(vc)
         vc.loadViewIfNeeded()
         updateTraitCollection(forChildViewController: vc)
-        print("Start adding animation")
-        let transitionContext = ColumnTransitioningContext(from: sender as? UIViewController ?? self, to: vc,
-                                                           animated: animated, appearing: true, direction: .left,
-                                                           completion: { (finished) in
+
+        let animationDirection = delegate?.columnViewController(columnViewController: self,
+                                                                directionForTransitionFromViewController: nil,
+                                                                to: vc) ?? .left
+        let transitionContext = ColumnTransitioningContext(container: self.columnView.contentView,
+                                                           from: nil, to: vc, animated: animated,
+                                                           direction: animationDirection, completion: { (finished) in
             vc.didMove(toParentViewController: self)
-            print("Completed animation")
             if focus {
                 print("Scroll to view")
             }
         })
-        self.lastAnimator = FlyInOutAnimatedTransitioning()
-        lastAnimator?.animateTransition(using: transitionContext!)
+
+        let animator = delegate?.columnViewController(columnViewController: self,
+                                                      animationControllerForTransitionFrom: nil,
+                                                      to: vc) ?? FlyInOutAnimatedTransitioning()
+        animator.animateTransition(using: transitionContext!)
     }
 
     /// Removes a column from the view controller.
@@ -55,7 +66,7 @@ open class ColumnScrollViewController: UIViewController, UIScrollViewDelegate {
     /// - Parameters:
     ///   - vc: The vc to remove
     ///   - animated: Animate removing the view
-    public func removeColumn(vc: UIViewController, animated: Bool) {
+    public func remove(column vc: UIViewController, animated: Bool) {
         guard childViewControllers.contains(vc) else {
             return
         }
@@ -102,9 +113,7 @@ open class ColumnScrollViewController: UIViewController, UIScrollViewDelegate {
         vc.view.setNeedsLayout()
     }
 
-    // MARK: - Child view width and trait collection management.
-
-
+    // MARK: - Child view trait collection management.
 
     /// Updates the trait collection for a child view controller
     ///
@@ -194,19 +203,9 @@ open class ColumnScrollViewController: UIViewController, UIScrollViewDelegate {
 
 // Adds default implementations for SizableViewController
 extension UIViewController: SizableViewController {
-    public var columnViewController: ColumnScrollViewController? {
-        return parent as? ColumnScrollViewController ?? parent?.columnViewController
+    public var columnViewController: ColumnViewController? {
+        return parent as? ColumnViewController ?? parent?.columnViewController
     }
-    
-    public var canOpenDetailsViewController: Bool {
-        return false
-    }
-
-    public var stringForOpeningDetailsViewController: String? {
-        return nil
-    }
-
-    public func openDetailsViewController() { }
 
     public var preferredHorizontalSizeClass: UIUserInterfaceSizeClass? {
         return nil
